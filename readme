@@ -1,1 +1,13 @@
-利用大疆的guidance进行slam地图重载和定位，之后会加入飞控消息。
+利用大疆的guidance进行slam地图重载和定位，之后会加入飞控消息。       
+1.guidance的imu是四元数格式，需转成欧拉角：    
+geometry_msgs::Vector3 toEulerAngle(geometry_msgs::Quaternion quat)  
+{   
+  geometry_msgs::Vector3 ans;    
+    
+  tf::Matrix3x3 R_FLU2ENU(tf::Quaternion(quat.x, quat.y, quat.z, quat.w));    
+  R_FLU2ENU.getRPY(ans.x, ans.y, ans.z);     
+  return ans;     
+}    
+2.不用在命令行输入是否重载，默认是都载入地图，若需要建图，鼠标点击reset就行了       
+（同样记得改名，名字不一样是为了避免替换之前有用的地图）         
+3.目前没有使用guidance的超声波深度图，依旧是用的双目计算深度信息。    
