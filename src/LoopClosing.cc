@@ -63,11 +63,11 @@ void LoopClosing::Run()
         // Check if there are keyframes in the queue
         if(CheckNewKeyFrames())
         {
-            // cout << "LoopClosing::Run() : There are keyframes in the queue." << endl;
+             cout << "LoopClosing::Run() : There are keyframes in the queue." << endl;
             // Detect loop candidates and check covisibility consistency
             if(DetectLoop())
             {
-                // cout << "LoopClosing::Run() : DetectLoop()" << endl;
+                 cout << "LoopClosing::Run() : DetectLoop()" << endl;
                // Compute similarity transformation [sR|t]
                // In the stereo/RGBD case s=1
                if(ComputeSim3())
@@ -140,10 +140,10 @@ bool LoopClosing::DetectLoop()
         if(score<minScore)
             minScore = score;
     }
-
+    cout<<"1111111111111111111"<<endl;
     // Query the database imposing the minimum score
     vector<KeyFrame*> vpCandidateKFs = mpKeyFrameDB->DetectLoopCandidates(mpCurrentKF, minScore);
-
+    cout<<"2222222222222222222"<<endl;
     // If there are no loop candidates, just add new keyframe and return false
     if(vpCandidateKFs.empty())
     {
